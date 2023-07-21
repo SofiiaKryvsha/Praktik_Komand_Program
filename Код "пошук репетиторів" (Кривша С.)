@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_TUTORS 10
+
+typedef struct {
+    char firstName[50];
+ char lastName[50];
+    float pricePerHour;
+    char subject[50];
+} Tutor;
+
+Tutor tutors[MAX_TUTORS];
+int tutorCount = 0;
+
+void addData() {
+    if (tutorCount == MAX_TUTORS) {
+        printf("Ви не можете додати більше даних\n");
+        return;
+    }
+
+    printf("Введіть ім'я: ");
+    scanf("%s", tutors[tutorCount].firstName);
+    printf("Введіть прізвище: ");
+    scanf("%s", tutors[tutorCount].lastName);
+    printf("Введіть ціну за годину: ");
+    scanf("%f", &tutors[tutorCount].pricePerHour);
+    printf("Виберіть предмет: Укр. мова, Англ. мова, Математика, Історія, Хімія, Фізика, Географія, Біологія\n");
+    scanf("%s", tutors[tutorCount].subject);
+
+    tutorCount++;
+}
+
+int main() {
+    int choice;
+
+    while(1) {
+        printf("\n----------- Меню -----------\n");
+        printf("1. Додати дані\n");
+        printf("2. Видалити дані\n");
+        printf("3. Переглянути дані\n");
+        printf("4. Вийти\n");
+        printf("------------------------------\n");
+        printf("Введіть ваш вибір: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                addData();
+                break;
+            case 2:
+                deleteData();
+                break;
+            case 3:
+                viewData();
+                break;
+            case 4:
+                printf("Вихід з програми\n");
+                return 0;
+            default:
+                printf("Невірний вибір. Спробуйте ще раз\n");
+        }
+    }
+
+    return 0;
+}
